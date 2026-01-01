@@ -2,27 +2,48 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Moon, Sun } from "lucide-react"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
     }
 
+    // Check for saved theme preference or default to dark mode
+    const savedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    setIsDark(savedTheme === 'dark' || (!savedTheme && prefersDark))
+
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navItems = ["About", "Experience", "Skills", "Contact"]
+  useEffect(() => {
+    const root = window.document.documentElement
+    if (isDark) {
+      root.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
+    } else {
+      root.classList.remove('dark')
+      localStorage.setItem('theme', 'light')
+    }
+  }, [isDark])
+
+  const navItems = ["About", "Experience", "Projects", "Skills", "Testimonials", "Blog", "GitHub", "Contact"]
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     element?.scrollIntoView({ behavior: "smooth" })
     setIsOpen(false)
+  }
+
+  const toggleTheme = () => {
+    setIsDark(!isDark)
   }
 
   return (
@@ -56,14 +77,27 @@ const Navigation = () => {
           ))}
         </div>
 
-        {/* Mobile Navigation Button */}
-        <motion.button
-          className="md:hidden text-foreground"
-          onClick={() => setIsOpen(!isOpen)}
-          whileHover={{ scale: 1.1 }}
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </motion.button>
+        {/* Theme Toggle & Mobile Menu Button */}
+        <div className="flex items-center gap-4">
+          <motion.button
+            onClick={toggleTheme}
+            className="p-2 rounded-lg bg-background/50 hover:bg-background/80 text-foreground transition-colors"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Toggle theme"
+          >
+            {isDark ? <Sun size={20} /> : <Moon size={20} />}
+          </motion.button>
+
+          {/* Mobile Navigation Button */}
+          <motion.button
+            className="md:hidden text-foreground"
+            onClick={() => setIsOpen(!isOpen)}
+            whileHover={{ scale: 1.1 }}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -84,6 +118,18 @@ const Navigation = () => {
               {item}
             </motion.button>
           ))}
+
+          {/* Mobile Theme Toggle */}
+          <div className="pt-4 border-t border-border">
+            <motion.button
+              onClick={toggleTheme}
+              className="flex items-center gap-3 w-full text-left text-foreground/70 hover:text-foreground transition-colors py-2"
+              whileHover={{ x: 4 }}
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+              <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+            </motion.button>
+          </div>
         </div>
       </motion.div>
     </motion.nav>

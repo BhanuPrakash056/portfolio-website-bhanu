@@ -1,0 +1,28 @@
+# Robots.txt for Bhanu Prakash R Portfolio
+
+User-agent: *
+Allow: /
+
+# Allow all major search engine bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Disallow access to Next.js internal paths
+Disallow: /_next/
+Disallow: /api/
+
+# Allow access to static assets
+Allow: /_next/static/
+Allow: /public/
+
+# Sitemap
+Sitemap: https://bhanuprakash-r.dev/sitemap.xml

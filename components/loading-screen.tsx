@@ -30,7 +30,7 @@ const LoadingScreen = () => {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-background"
+      className="fixed inset-0 z-50 flex items-center justify-center"
       initial={{ opacity: 1 }}
       animate={{ opacity: isComplete ? 0 : 1 }}
       transition={{ duration: 0.5 }}
@@ -68,31 +68,18 @@ const LoadingScreen = () => {
           />
         </div>
 
-        {/* Progress Bar */}
+        {/* Progress Bar with Milestones */}
         <div className="w-64 mx-auto">
-          <div className="flex justify-between text-sm text-muted-foreground mb-2">
-            <span>Loading</span>
-            <span>{Math.round(progress)}%</span>
-          </div>
-          <div className="w-full bg-muted rounded-full h-2">
+          <div className="relative w-full bg-muted rounded-full h-2">
             <motion.div
               className="bg-gradient-to-r from-primary to-accent h-2 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.1 }}
+              transition={{ duration: 0.3 }}
             />
           </div>
         </div>
 
-        {/* Loading Text */}
-        <motion.p
-          className="text-muted-foreground"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          Preparing your experience...
-        </motion.p>
       </div>
     </motion.div>
   )

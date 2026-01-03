@@ -34,11 +34,15 @@ const Navigation = () => {
     }
   }, [isDark])
 
-  const navItems = ["About", "Experience", "Projects", "Skills", "Testimonials", "Blog", "GitHub", "Contact"]
+  const navItems = ["Home", "About", "Experience", "Skills", "Contact"]
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    element?.scrollIntoView({ behavior: "smooth" })
+    if (id === "home") {
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    } else {
+      const element = document.getElementById(id)
+      element?.scrollIntoView({ behavior: "smooth" })
+    }
     setIsOpen(false)
   }
 

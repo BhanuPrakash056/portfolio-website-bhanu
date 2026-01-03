@@ -159,22 +159,6 @@ const EnhancedHero = () => {
               </div>
             </div>
 
-            {/* Enhanced Stats */}
-            <div className="grid grid-cols-3 gap-4 max-w-md mx-auto md:mx-0">
-              <div className="text-center p-4 rounded-xl bg-slate-800/30 backdrop-blur-sm border border-slate-700/50">
-                <div className="text-3xl font-bold text-white mb-1">3+</div>
-                <div className="text-sm text-slate-400">Years Experience</div>
-              </div>
-              <div className="text-center p-4 rounded-xl bg-slate-800/30 backdrop-blur-sm border border-slate-700/50">
-                <div className="text-3xl font-bold text-white mb-1">50+</div>
-                <div className="text-sm text-slate-400">Projects</div>
-              </div>
-              <div className="text-center p-4 rounded-xl bg-slate-800/30 backdrop-blur-sm border border-slate-700/50">
-                <div className="text-3xl font-bold text-white mb-1">100%</div>
-                <div className="text-sm text-slate-400">Client Satisfaction</div>
-              </div>
-            </div>
-
             {/* Enhanced CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a

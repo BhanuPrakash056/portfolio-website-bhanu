@@ -9,6 +9,11 @@ const config = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    turbo: {
+      root: process.cwd(),
+    },
+  },
 };
 
 const withMDX = createMDX({

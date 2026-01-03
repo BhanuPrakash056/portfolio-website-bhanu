@@ -1,8 +1,7 @@
-import { createMDX } from 'fumadocs-mdx/next';
+import { createMDX } from "fumadocs-mdx/next";
 
 /** @type {import('next').NextConfig} */
 const config = {
-  output: 'export',
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
@@ -17,7 +16,4 @@ const withMDX = createMDX({
   // configPath: "source.config.ts"
 });
 
-const nextConfig = withMDX(config);
-nextConfig.output = 'export';
-
-export default nextConfig;
+export default withMDX(config);

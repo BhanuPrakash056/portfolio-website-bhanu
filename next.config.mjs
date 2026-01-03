@@ -2,17 +2,13 @@ import { createMDX } from 'fumadocs-mdx/next';
 
 /** @type {import('next').NextConfig} */
 const config = {
+  output: 'export',
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },
   images: {
     unoptimized: true,
-  },
-  experimental: {
-    turbo: {
-      root: process.cwd(),
-    },
   },
 };
 

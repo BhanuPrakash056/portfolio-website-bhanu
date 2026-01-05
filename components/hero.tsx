@@ -53,7 +53,7 @@ const EnhancedHero = () => {
 
   // Mouse move effect for spotlight
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener("mousemove", handleMouseMove);

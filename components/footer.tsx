@@ -149,19 +149,19 @@ const Footer = () => {
                   href="https://linkedin.com/in/bhanuprakash-r"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-blue-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-slate-700 hover:border-blue-500"
-                  whileHover={{ scale: 1.1 }}
+                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-blue-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-slate-700 hover:border-blue-500"
+                  whileHover={{ scale: 1.05 }}
                   aria-label="LinkedIn Profile"
                 >
                   <Linkedin size={20} />
                 </motion.a>
 
                 <motion.a
-                  href="https://github.com"
+                  href="https://github.com/bhanu-pratap-r"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-purple-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-slate-700 hover:border-purple-500"
-                  whileHover={{ scale: 1.1 }}
+                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-purple-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-slate-700 hover:border-purple-500"
+                  whileHover={{ scale: 1.05 }}
                   aria-label="GitHub Profile"
                 >
                   <Github size={20} />
@@ -169,8 +169,8 @@ const Footer = () => {
 
                 <motion.a
                   href="mailto:bp71712@gmail.com"
-                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-pink-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border border-slate-700 hover:border-pink-500"
-                  whileHover={{ scale: 1.1 }}
+                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-pink-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-slate-700 hover:border-pink-500"
+                  whileHover={{ scale: 1.05 }}
                   aria-label="Email Bhanu Prakash R"
                 >
                   <Mail size={20} />

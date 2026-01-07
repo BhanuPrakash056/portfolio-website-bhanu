@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import { RootProvider } from "fumadocs-ui/provider/next"
 import ErrorBoundary from "@/components/error-boundary"
 import "./globals.css"
 
@@ -93,12 +92,10 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
       </head>
       <body className={`font-sans antialiased bg-background text-foreground`} suppressHydrationWarning>
-        <RootProvider>
-          <ErrorBoundary>
-            {children}
-          </ErrorBoundary>
-          <Analytics />
-        </RootProvider>
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
+        <Analytics />
       </body>
     </html>
   )

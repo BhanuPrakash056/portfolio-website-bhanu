@@ -63,11 +63,11 @@ const Experience = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               {/* Timeline Line */}
-              <div className="hidden md:block absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-secondary to-transparent" />
+              <div className="hidden lg:block absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-secondary to-transparent" />
 
               {/* Timeline Dot */}
               <motion.div
-                className="hidden md:block absolute -left-14 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background"
+                className="hidden lg:block absolute -left-14 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background"
                 whileHover={{ scale: 1.2 }}
               />
 

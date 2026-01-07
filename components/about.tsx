@@ -93,11 +93,11 @@ const About = () => {
                 ].map((cert, i) => (
                   <motion.div
                     key={i}
-                    className="p-4 rounded-lg bg-card border border-border hover:border-primary transition-all"
-                    whileHover={{ x: 5 }}
+                    className="p-6 rounded-lg bg-card border border-border hover:border-primary transition-all duration-300"
+                    whileHover={{ x: 5, boxShadow: "0 10px 25px rgba(59, 130, 246, 0.1)" }}
                   >
-                    <p className="text-sm text-accent font-semibold">{cert.code}</p>
-                    <p className="text-foreground font-medium mt-1">{cert.title}</p>
+                    <p className="text-sm text-accent font-semibold uppercase tracking-wider">{cert.code}</p>
+                    <p className="text-foreground font-medium mt-2">{cert.title}</p>
                   </motion.div>
                 ))}
               </div>

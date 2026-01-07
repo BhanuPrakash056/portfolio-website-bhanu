@@ -210,7 +210,7 @@ const Contact = () => {
             <motion.button
               type="submit"
               disabled={status === 'loading'}
-              className="w-full px-6 py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full px-6 py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
               whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
               whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
             >

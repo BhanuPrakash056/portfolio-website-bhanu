@@ -61,7 +61,7 @@ const EnhancedHero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 px-4">
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e510_1px,transparent_1px),linear-gradient(to_bottom,#4f46e510_1px,transparent_1px)] bg-[size:4rem_4rem] animate-pulse" />
@@ -78,7 +78,7 @@ const EnhancedHero = () => {
 
       {/* Enhanced Floating Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(25)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-gradient-to-r from-blue-400/40 to-purple-400/40 rounded-full animate-float"
@@ -90,7 +90,7 @@ const EnhancedHero = () => {
             }}
           />
         ))}
-        {[...Array(10)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <div
             key={`large-${i}`}
             className="absolute w-2 h-2 bg-gradient-to-r from-cyan-400/20 to-pink-400/20 rounded-full animate-float"
@@ -126,7 +126,7 @@ const EnhancedHero = () => {
 
             {/* Enhanced Name with Better Gradient */}
             <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient leading-tight">
                 Bhanu Prakash R
               </h1>
               <p className="text-lg md:text-xl text-slate-400 font-medium max-w-lg mx-auto md:mx-0 leading-relaxed">
@@ -134,11 +134,11 @@ const EnhancedHero = () => {
                 and cloud innovation.
               </p>
               {/* Enhanced Dynamic Role */}
-              <div className="h-20 md:h-24 flex items-center justify-center md:justify-start">
-                <h2 className="text-2xl md:text-4xl font-semibold text-blue-300 flex items-center gap-2">
+              <div className="h-16 sm:h-20 md:h-24 flex items-center justify-center md:justify-start">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-blue-300 flex items-center gap-2 flex-wrap">
                   <span className="text-blue-400">&lt;/</span>
                   {displayedText}
-                  <span className="w-1 h-10 bg-gradient-to-b from-blue-400 to-purple-400 animate-blink rounded-full" />
+                  <span className="w-1 h-6 sm:h-8 md:h-10 bg-gradient-to-b from-blue-400 to-purple-400 animate-blink rounded-full" />
                   <span className="text-purple-400">&gt;</span>
                 </h2>
               </div>
@@ -163,7 +163,7 @@ const EnhancedHero = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a
                 href="#contact"
-                className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white font-semibold shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-110 overflow-hidden"
+                className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white font-semibold shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105 overflow-hidden"
                 aria-label="Contact Bhanu Prakash R"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -177,7 +177,7 @@ const EnhancedHero = () => {
                 href="/resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group px-8 py-4 rounded-xl border-2 border-blue-500/50 text-blue-400 font-semibold hover:bg-blue-500/10 hover:border-blue-400 transition-all duration-300 transform hover:scale-110 backdrop-blur-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/20"
+                className="group px-8 py-4 rounded-xl border-2 border-blue-500/50 text-blue-400 font-semibold hover:bg-blue-500/10 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/20"
                 aria-label="View Resume PDF"
               >
                 <Code className="w-5 h-5 group-hover:rotate-12 transition-transform" />
@@ -191,7 +191,7 @@ const EnhancedHero = () => {
                 href="https://linkedin.com/in/bhanuprakash-r"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-blue-600 hover:to-blue-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-115 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-blue-500 shadow-lg hover:shadow-blue-500/30"
+                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-blue-600 hover:to-blue-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-blue-500 shadow-lg hover:shadow-blue-500/30"
                 aria-label="LinkedIn Profile"
               >
                 <div className="absolute inset-0 bg-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
@@ -199,10 +199,10 @@ const EnhancedHero = () => {
               </a>
 
               <a
-                href="https://github.com"
+                href="https://github.com/bhanu-pratap-r"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-purple-600 hover:to-purple-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-115 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-purple-500 shadow-lg hover:shadow-purple-500/30"
+                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-purple-600 hover:to-purple-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-purple-500 shadow-lg hover:shadow-purple-500/30"
                 aria-label="GitHub Profile"
               >
                 <div className="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
@@ -211,7 +211,7 @@ const EnhancedHero = () => {
 
               <a
                 href="mailto:bp71712@gmail.com"
-                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-pink-600 hover:to-pink-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-115 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-pink-500 shadow-lg hover:shadow-pink-500/30"
+                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-pink-600 hover:to-pink-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-pink-500 shadow-lg hover:shadow-pink-500/30"
                 aria-label="Email Bhanu Prakash R"
               >
                 <div className="absolute inset-0 bg-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
@@ -243,7 +243,7 @@ const EnhancedHero = () => {
               {techStack.map((tech, i) => (
                 <div
                   key={tech}
-                  className="absolute bg-gradient-to-r from-slate-800/90 to-slate-900/90 backdrop-blur-md px-4 py-2 rounded-lg text-sm font-medium text-blue-300 border border-blue-500/30 shadow-lg animate-float hover:scale-110 transition-transform"
+                  className="absolute bg-gradient-to-r from-slate-800/90 to-slate-900/90 backdrop-blur-md px-4 py-2 rounded-lg text-sm font-medium text-blue-300 border border-blue-500/30 shadow-lg animate-float hover:scale-105 transition-transform"
                   style={{
                     top: `${
                       50 + 45 * Math.cos((i * 2 * Math.PI) / techStack.length)

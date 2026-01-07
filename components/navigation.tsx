@@ -41,7 +41,12 @@ const Navigation = () => {
       window.scrollTo({ top: 0, behavior: "smooth" })
     } else {
       const element = document.getElementById(id)
-      element?.scrollIntoView({ behavior: "smooth" })
+      if (element) {
+        const offset = 80 // Account for fixed navbar height
+        const elementPosition = element.getBoundingClientRect().top
+        const offsetPosition = elementPosition + window.pageYOffset - offset
+        window.scrollTo({ top: offsetPosition, behavior: "smooth" })
+      }
     }
     setIsOpen(false)
   }

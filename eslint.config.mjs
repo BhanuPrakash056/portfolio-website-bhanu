@@ -1,6 +1,7 @@
 import nextPlugin from "eslint-config-next";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsparser from "@typescript-eslint/parser";
+import prettierConfig from "eslint-config-prettier";
 
 const eslintConfig = [
   {
@@ -30,6 +31,7 @@ const eslintConfig = [
       "react-hooks/purity": "warn",
     },
   },
+  prettierConfig,
 ];
 
 export default eslintConfig;

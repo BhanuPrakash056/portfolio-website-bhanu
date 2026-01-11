@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Experience = () => {
-  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   const experiences = [
     {
@@ -39,7 +39,7 @@ const Experience = () => {
         "Developed employee onboarding portal with React and Node.js. Integrated AWS services for email and document management.",
       skills: ["React", "Node.js", "PostgreSQL", "AWS"],
     },
-  ]
+  ];
 
   return (
     <section id="experience" className="py-20 px-4 md:px-0" ref={ref}>
@@ -74,17 +74,26 @@ const Experience = () => {
               {/* Card */}
               <motion.div
                 className="p-6 rounded-lg bg-card border border-border hover:border-primary transition-all"
-                whileHover={{ y: -5, boxShadow: "0 20px 25px rgba(59, 130, 246, 0.1)" }}
+                whileHover={{
+                  y: -5,
+                  boxShadow: "0 20px 25px rgba(59, 130, 246, 0.1)",
+                }}
               >
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-3">
                   <div>
-                    <h3 className="text-xl font-bold text-foreground">{exp.title}</h3>
+                    <h3 className="text-xl font-bold text-foreground">
+                      {exp.title}
+                    </h3>
                     <p className="text-primary font-semibold">{exp.company}</p>
                   </div>
-                  <span className="text-foreground/60 text-sm md:text-right mt-2 md:mt-0">{exp.period}</span>
+                  <span className="text-foreground/60 text-sm md:text-right mt-2 md:mt-0">
+                    {exp.period}
+                  </span>
                 </div>
 
-                <p className="text-foreground/70 mb-4 leading-relaxed">{exp.description}</p>
+                <p className="text-foreground/70 mb-4 leading-relaxed">
+                  {exp.description}
+                </p>
 
                 <div className="flex flex-wrap gap-2">
                   {exp.skills.map((skill) => (
@@ -103,7 +112,7 @@ const Experience = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Experience
+export default Experience;

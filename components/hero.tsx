@@ -147,15 +147,25 @@ const EnhancedHero = () => {
             {/* Enhanced Description */}
             <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
               <p className="text-lg text-slate-300 leading-relaxed mb-4">
-                Passionate full-stack engineer specializing in scalable web applications and DevOps solutions.
-                Currently driving innovation at{" "}
-                <span className="text-blue-400 font-semibold bg-blue-500/10 px-2 py-1 rounded-md">Elanco</span>,
-                building cloud-native applications and optimizing development workflows.
+                Passionate full-stack engineer specializing in scalable web
+                applications and DevOps solutions. Currently driving innovation
+                at{" "}
+                <span className="text-blue-400 font-semibold bg-blue-500/10 px-2 py-1 rounded-md">
+                  Elanco
+                </span>
+                , building cloud-native applications and optimizing development
+                workflows.
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium">React Expert</span>
-                <span className="px-3 py-1 bg-purple-500/10 text-purple-300 rounded-full text-sm font-medium">Cloud Architect</span>
-                <span className="px-3 py-1 bg-green-500/10 text-green-300 rounded-full text-sm font-medium">DevOps Specialist</span>
+                <span className="px-3 py-1 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium">
+                  React Expert
+                </span>
+                <span className="px-3 py-1 bg-purple-500/10 text-purple-300 rounded-full text-sm font-medium">
+                  Cloud Architect
+                </span>
+                <span className="px-3 py-1 bg-green-500/10 text-green-300 rounded-full text-sm font-medium">
+                  DevOps Specialist
+                </span>
               </div>
             </div>
 

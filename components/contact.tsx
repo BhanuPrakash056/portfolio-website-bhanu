@@ -1,60 +1,76 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from "lucide-react"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Loader2,
+} from "lucide-react";
 
 const Contact = () => {
-  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
-  const [errors, setErrors] = useState<{[key: string]: string}>({})
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }))
+      setErrors((prev) => ({ ...prev, [name]: "" }));
     }
-  }
+  };
 
   const validateForm = () => {
-    const newErrors: {[key: string]: string} = {}
+    const newErrors: { [key: string]: string } = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required'
+      newErrors.name = "Name is required";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required'
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email'
+      newErrors.email = "Please enter a valid email";
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required'
+      newErrors.message = "Message is required";
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters'
+      newErrors.message = "Message must be at least 10 characters";
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (!validateForm()) return
+    if (!validateForm()) return;
 
-    setStatus('loading')
+    setStatus("loading");
 
     try {
       // Simulate API call - replace with actual form submission
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Here you would integrate with a service like:
       // - Formspree: https://formspree.io/
@@ -62,19 +78,19 @@ const Contact = () => {
       // - Netlify Forms
       // - Or your own backend API
 
-      setStatus('success')
-      setFormData({ name: "", email: "", message: "" })
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
 
       setTimeout(() => {
-        setStatus('idle')
-      }, 5000)
+        setStatus("idle");
+      }, 5000);
     } catch (error) {
-      setStatus('error')
+      setStatus("error");
       setTimeout(() => {
-        setStatus('idle')
-      }, 5000)
+        setStatus("idle");
+      }, 5000);
     }
-  }
+  };
 
   return (
     <section id="contact" className="py-20 px-4 md:px-0" ref={ref}>
@@ -96,7 +112,8 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <p className="text-lg text-foreground/70 mb-8">
-              I'm always interested in hearing about new opportunities and projects. Feel free to reach out!
+              I'm always interested in hearing about new opportunities and
+              projects. Feel free to reach out!
             </p>
 
             <div className="space-y-6">
@@ -131,7 +148,9 @@ const Contact = () => {
                 <MapPin className="text-primary flex-shrink-0 mt-1" size={24} />
                 <div>
                   <h4 className="font-semibold text-foreground">Location</h4>
-                  <p className="text-foreground/60">Bengaluru, Karnataka, India</p>
+                  <p className="text-foreground/60">
+                    Bengaluru, Karnataka, India
+                  </p>
                 </div>
               </motion.div>
             </div>
@@ -146,14 +165,18 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Name *</label>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Name *
+              </label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 rounded-lg bg-card border transition-colors text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 ${
-                  errors.name ? 'border-red-500' : 'border-border focus:border-primary'
+                  errors.name
+                    ? "border-red-500"
+                    : "border-border focus:border-primary"
                 }`}
                 placeholder="Your full name"
                 required
@@ -167,14 +190,18 @@ const Contact = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Email *</label>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Email *
+              </label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 rounded-lg bg-card border transition-colors text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 ${
-                  errors.email ? 'border-red-500' : 'border-border focus:border-primary'
+                  errors.email
+                    ? "border-red-500"
+                    : "border-border focus:border-primary"
                 }`}
                 placeholder="your.email@example.com"
                 required
@@ -188,13 +215,17 @@ const Contact = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-foreground mb-2">Message *</label>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Message *
+              </label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 rounded-lg bg-card border transition-colors text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 min-h-[120px] resize-none ${
-                  errors.message ? 'border-red-500' : 'border-border focus:border-primary'
+                  errors.message
+                    ? "border-red-500"
+                    : "border-border focus:border-primary"
                 }`}
                 placeholder="Tell me about your project or just say hello..."
                 required
@@ -209,12 +240,12 @@ const Contact = () => {
 
             <motion.button
               type="submit"
-              disabled={status === 'loading'}
+              disabled={status === "loading"}
               className="w-full px-6 py-4 rounded-lg bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none"
-              whileHover={{ scale: status === 'loading' ? 1 : 1.02 }}
-              whileTap={{ scale: status === 'loading' ? 1 : 0.98 }}
+              whileHover={{ scale: status === "loading" ? 1 : 1.02 }}
+              whileTap={{ scale: status === "loading" ? 1 : 0.98 }}
             >
-              {status === 'loading' ? (
+              {status === "loading" ? (
                 <>
                   <Loader2 size={20} className="animate-spin" />
                   Sending...
@@ -228,7 +259,7 @@ const Contact = () => {
             </motion.button>
 
             {/* Status Messages */}
-            {status === 'success' && (
+            {status === "success" && (
               <motion.div
                 className="p-4 rounded-lg bg-green-500/10 border border-green-500/50 text-green-400 flex items-center gap-2"
                 initial={{ opacity: 0, y: 10 }}
@@ -237,12 +268,14 @@ const Contact = () => {
                 <CheckCircle size={20} />
                 <div>
                   <p className="font-medium">Message sent successfully!</p>
-                  <p className="text-sm">I'll get back to you within 24 hours.</p>
+                  <p className="text-sm">
+                    I'll get back to you within 24 hours.
+                  </p>
                 </div>
               </motion.div>
             )}
 
-            {status === 'error' && (
+            {status === "error" && (
               <motion.div
                 className="p-4 rounded-lg bg-red-500/10 border border-red-500/50 text-red-400 flex items-center gap-2"
                 initial={{ opacity: 0, y: 10 }}
@@ -251,7 +284,9 @@ const Contact = () => {
                 <AlertCircle size={20} />
                 <div>
                   <p className="font-medium">Failed to send message</p>
-                  <p className="text-sm">Please try again or contact me directly at bp71712@gmail.com</p>
+                  <p className="text-sm">
+                    Please try again or contact me directly at bp71712@gmail.com
+                  </p>
                 </div>
               </motion.div>
             )}
@@ -259,7 +294,7 @@ const Contact = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;

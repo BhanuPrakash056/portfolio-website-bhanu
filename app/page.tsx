@@ -45,7 +45,10 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, transition: { duration: 0.7 } }}
         >
-          <div className="min-h-screen bg-background relative overflow-hidden" id="home">
+          <div
+            className="min-h-screen bg-background relative overflow-hidden"
+            id="home"
+          >
             <div className="fixed inset-0 pointer-events-none z-0">
               <div className="absolute top-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse animation-delay-2000" />

@@ -12,7 +12,7 @@ A modern, responsive portfolio website built with Next.js, showcasing profession
 - **Smooth Animations**: Framer Motion powered transitions and interactions
 - **Responsive Layout**: Fully responsive design optimized for all devices
 - **Performance Optimized**: Static site generation for lightning-fast load times
-- **Interactive Components**: 
+- **Interactive Components**:
   - Dynamic typing effect for role titles
   - Animated loading screen
   - Floating particle effects
@@ -41,17 +41,20 @@ A modern, responsive portfolio website built with Next.js, showcasing profession
 ## 📦 Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/BhanuPrakash056/portfolio-website-bhanu.git
    cd portfolio-website-bhanu
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm install
    ```
 
 3. **Run the development server**
+
    ```bash
    pnpm run dev
    ```
@@ -62,19 +65,23 @@ A modern, responsive portfolio website built with Next.js, showcasing profession
 ## 🔨 Build & Deployment
 
 ### Build for Production
+
 ```bash
 pnpm run build
 ```
 
 ### Preview Production Build
+
 ```bash
 pnpm run preview
 ```
 
 ### Deploy to GitHub Pages
+
 The project is configured for automatic deployment to GitHub Pages via GitHub Actions. Every push to the `main` branch triggers a deployment.
 
 **Manual Deployment:**
+
 1. Ensure GitHub Pages is enabled in repository settings
 2. Set **Source** to "GitHub Actions"
 3. Push to `main` branch or trigger workflow manually
@@ -139,6 +146,7 @@ portfolio-website-bhanu/
 ### Colors & Theme
 
 Edit `app/globals.css` to customize the color scheme:
+
 ```css
 :root {
   --background: oklch(0.08 0 0);
@@ -151,12 +159,13 @@ Edit `app/globals.css` to customize the color scheme:
 ### Metadata & SEO
 
 Update `app/layout.tsx` for SEO optimization:
+
 ```typescript
 export const metadata: Metadata = {
   title: "Your Name | Your Title",
   description: "Your description",
   // ...
-}
+};
 ```
 
 ## 📄 Scripts
@@ -178,6 +187,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ## 👨‍💻 Author
 
 **Bhanu Prakash R**
+
 - GitHub: [@BhanuPrakash056](https://github.com/BhanuPrakash056)
 - LinkedIn: [bhanuprakash-r](https://linkedin.com/in/bhanuprakash-r)
 - Email: bp71712@gmail.com

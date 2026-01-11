@@ -1,10 +1,20 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, MapPin, Phone, Code, Cloud, Zap, ExternalLink } from "lucide-react"
+import { motion } from "framer-motion";
+import {
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Code,
+  Cloud,
+  Zap,
+  ExternalLink,
+} from "lucide-react";
 
 const Footer = () => {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   const services = [
     "Full-Stack Development",
@@ -12,8 +22,8 @@ const Footer = () => {
     "Cloud Architecture",
     "API Development",
     "Performance Optimization",
-    "Technical Consulting"
-  ]
+    "Technical Consulting",
+  ];
 
   const technologies = [
     "React/Next.js",
@@ -21,8 +31,8 @@ const Footer = () => {
     "AWS/Azure",
     "Docker/K8s",
     "PostgreSQL",
-    "TypeScript"
-  ]
+    "TypeScript",
+  ];
 
   return (
     <footer className="bg-gradient-to-b from-background to-muted/20 border-t border-border">
@@ -42,8 +52,9 @@ const Footer = () => {
                 Bhanu Prakash R
               </h3>
               <p className="text-foreground/70 mb-6 leading-relaxed max-w-md">
-                Passionate full-stack engineer crafting scalable solutions and optimizing development workflows.
-                Let's build something amazing together.
+                Passionate full-stack engineer crafting scalable solutions and
+                optimizing development workflows. Let's build something amazing
+                together.
               </p>
 
               {/* Contact Info */}
@@ -54,7 +65,10 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-3 text-foreground/60">
                   <Mail size={16} className="text-primary flex-shrink-0" />
-                  <a href="mailto:bp71712@gmail.com" className="text-sm hover:text-primary transition-colors">
+                  <a
+                    href="mailto:bp71712@gmail.com"
+                    className="text-sm hover:text-primary transition-colors"
+                  >
                     bp71712@gmail.com
                   </a>
                 </div>
@@ -115,7 +129,9 @@ const Footer = () => {
               transition={{ duration: 0.6, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <h4 className="font-semibold text-foreground mb-4">Quick Links</h4>
+              <h4 className="font-semibold text-foreground mb-4">
+                Quick Links
+              </h4>
               <div className="grid grid-cols-2 gap-2">
                 {[
                   { name: "About", href: "#about" },
@@ -123,7 +139,7 @@ const Footer = () => {
                   { name: "Projects", href: "#projects" },
                   { name: "Skills", href: "#skills" },
                   { name: "Testimonials", href: "#testimonials" },
-                  { name: "Contact", href: "#contact" }
+                  { name: "Contact", href: "#contact" },
                 ].map((link) => (
                   <a
                     key={link.name}
@@ -179,7 +195,9 @@ const Footer = () => {
 
               {/* Call to Action */}
               <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-4 border border-primary/20">
-                <p className="text-sm text-foreground/80 mb-2">Ready to start a project?</p>
+                <p className="text-sm text-foreground/80 mb-2">
+                  Ready to start a project?
+                </p>
                 <a
                   href="#contact"
                   className="text-sm text-primary hover:text-primary/80 font-medium flex items-center gap-1 transition-colors"
@@ -212,13 +230,17 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-primary transition-colors">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-primary transition-colors">
+              Terms of Service
+            </a>
           </div>
         </div>
       </motion.div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

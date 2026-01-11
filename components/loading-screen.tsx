@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const LoadingScreen = () => {
-  const [progress, setProgress] = useState(0)
-  const [isComplete, setIsComplete] = useState(false)
+  const [progress, setProgress] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setProgress(100)
-      setTimeout(() => setIsComplete(true), 500)
-    }, 2000)
+      setProgress(100);
+      setTimeout(() => setIsComplete(true), 500);
+    }, 2000);
 
     const interval = setInterval(() => {
-      setProgress(prev => {
-        if (prev >= 90) return prev
-        return prev + Math.random() * 15
-      })
-    }, 100)
+      setProgress((prev) => {
+        if (prev >= 90) return prev;
+        return prev + Math.random() * 15;
+      });
+    }, 100);
 
     return () => {
-      clearTimeout(timer)
-      clearInterval(interval)
-    }
-  }, [])
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
+  }, []);
 
-  if (isComplete) return null
+  if (isComplete) return null;
 
   return (
     <motion.div
@@ -79,10 +79,9 @@ const LoadingScreen = () => {
             />
           </div>
         </div>
-
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default LoadingScreen
+export default LoadingScreen;

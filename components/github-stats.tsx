@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-import { Github, Star, GitFork, Eye, Code, Users } from "lucide-react"
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { Github, Star, GitFork, Eye, Code, Users } from "lucide-react";
 
 const GitHubStats = () => {
-  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true })
+  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   // Mock GitHub stats - in a real implementation, you'd fetch these from GitHub API
   const stats = {
@@ -15,12 +15,13 @@ const GitHubStats = () => {
     followers: 156,
     following: 87,
     contributions: 1247,
-  }
+  };
 
   const repositories = [
     {
       name: "react-portfolio-template",
-      description: "A modern, responsive portfolio template built with React and Next.js",
+      description:
+        "A modern, responsive portfolio template built with React and Next.js",
       stars: 45,
       forks: 23,
       language: "TypeScript",
@@ -28,7 +29,8 @@ const GitHubStats = () => {
     },
     {
       name: "devops-automation-scripts",
-      description: "Collection of automation scripts for CI/CD pipelines and infrastructure",
+      description:
+        "Collection of automation scripts for CI/CD pipelines and infrastructure",
       stars: 38,
       forks: 15,
       language: "Python",
@@ -36,7 +38,8 @@ const GitHubStats = () => {
     },
     {
       name: "microservices-architecture",
-      description: "Example microservices architecture with Docker and Kubernetes",
+      description:
+        "Example microservices architecture with Docker and Kubernetes",
       stars: 52,
       forks: 28,
       language: "Go",
@@ -44,13 +47,14 @@ const GitHubStats = () => {
     },
     {
       name: "ai-chatbot-framework",
-      description: "Framework for building AI-powered chatbots with multiple LLM providers",
+      description:
+        "Framework for building AI-powered chatbots with multiple LLM providers",
       stars: 67,
       forks: 31,
       language: "JavaScript",
       languageColor: "#f1e05a",
     },
-  ]
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -61,12 +65,12 @@ const GitHubStats = () => {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
+  };
 
   return (
     <section id="github-stats" className="py-20 px-4 md:px-0" ref={ref}>
@@ -93,14 +97,44 @@ const GitHubStats = () => {
           animate={inView ? "visible" : "hidden"}
         >
           {[
-            { label: "Total Stars", value: stats.totalStars, icon: Star, color: "text-yellow-500" },
-            { label: "Forks", value: stats.totalForks, icon: GitFork, color: "text-blue-500" },
-            { label: "Repositories", value: stats.totalRepos, icon: Code, color: "text-green-500" },
-            { label: "Followers", value: stats.followers, icon: Users, color: "text-purple-500" },
-            { label: "Following", value: stats.following, icon: Eye, color: "text-orange-500" },
-            { label: "Contributions", value: stats.contributions, icon: Github, color: "text-gray-500" },
+            {
+              label: "Total Stars",
+              value: stats.totalStars,
+              icon: Star,
+              color: "text-yellow-500",
+            },
+            {
+              label: "Forks",
+              value: stats.totalForks,
+              icon: GitFork,
+              color: "text-blue-500",
+            },
+            {
+              label: "Repositories",
+              value: stats.totalRepos,
+              icon: Code,
+              color: "text-green-500",
+            },
+            {
+              label: "Followers",
+              value: stats.followers,
+              icon: Users,
+              color: "text-purple-500",
+            },
+            {
+              label: "Following",
+              value: stats.following,
+              icon: Eye,
+              color: "text-orange-500",
+            },
+            {
+              label: "Contributions",
+              value: stats.contributions,
+              icon: Github,
+              color: "text-gray-500",
+            },
           ].map((stat) => {
-            const IconComponent = stat.icon
+            const IconComponent = stat.icon;
             return (
               <motion.div
                 key={stat.label}
@@ -108,11 +142,17 @@ const GitHubStats = () => {
                 variants={itemVariants}
                 whileHover={{ y: -4 }}
               >
-                <IconComponent className={`w-8 h-8 ${stat.color} mx-auto mb-2`} />
-                <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                <IconComponent
+                  className={`w-8 h-8 ${stat.color} mx-auto mb-2`}
+                />
+                <div className="text-2xl font-bold text-foreground mb-1">
+                  {stat.value}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {stat.label}
+                </div>
               </motion.div>
-            )
+            );
           })}
         </motion.div>
 
@@ -123,7 +163,9 @@ const GitHubStats = () => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <h3 className="text-2xl font-bold mb-6 text-center">Popular Repositories</h3>
+          <h3 className="text-2xl font-bold mb-6 text-center">
+            Popular Repositories
+          </h3>
         </motion.div>
 
         <motion.div
@@ -165,7 +207,9 @@ const GitHubStats = () => {
                     className="w-3 h-3 rounded-full"
                     style={{ backgroundColor: repo.languageColor }}
                   />
-                  <span className="text-sm text-muted-foreground">{repo.language}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {repo.language}
+                  </span>
                 </div>
                 <a
                   href={`https://github.com/bhanuprakash-r/${repo.name}`}
@@ -199,7 +243,7 @@ const GitHubStats = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default GitHubStats
+export default GitHubStats;

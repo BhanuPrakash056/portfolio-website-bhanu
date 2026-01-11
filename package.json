@@ -7,6 +7,8 @@
     "dev": "next dev --turbo",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "start": "next start",
     "preview": "next build && next start"
   },
@@ -78,7 +80,9 @@
     "@typescript-eslint/parser": "^8.52.0",
     "eslint": "^9.39.2",
     "eslint-config-next": "^16.1.1",
+    "eslint-config-prettier": "^10.1.8",
     "postcss": "^8.5",
+    "prettier": "^3.7.4",
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"

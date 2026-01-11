@@ -5,7 +5,9 @@ export default function LoadingScreen() {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
       <div className="flex flex-col items-center">
         <div className="loader mb-4" />
-        <span className="text-white text-lg font-semibold animate-pulse">Loading...</span>
+        <span className="text-white text-lg font-semibold animate-pulse">
+          Loading...
+        </span>
       </div>
       <style jsx>{`
         .loader {
@@ -17,8 +19,12 @@ export default function LoadingScreen() {
           animation: spin 1s linear infinite;
         }
         @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
         }
       `}</style>
     </div>

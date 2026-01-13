@@ -158,7 +158,7 @@ const EnhancedHero = () => {
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="px-3 py-1 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium">
-                  React Expert
+                  Full Stack Expert
                 </span>
                 <span className="px-3 py-1 bg-purple-500/10 text-purple-300 rounded-full text-sm font-medium">
                   Cloud Architect

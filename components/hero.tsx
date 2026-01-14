@@ -61,7 +61,7 @@ const EnhancedHero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 px-4">
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 px-4">
       {/* Enhanced Animated Background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e510_1px,transparent_1px),linear-gradient(to_bottom,#4f46e510_1px,transparent_1px)] bg-[size:4rem_4rem] animate-pulse" />
@@ -209,7 +209,7 @@ const EnhancedHero = () => {
               </a>
 
               <a
-                href="https://github.com/bhanu-pratap-r"
+                href="https://github.com/bhanuprakash056"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-purple-600 hover:to-purple-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-purple-500 shadow-lg hover:shadow-purple-500/30"
@@ -231,48 +231,50 @@ const EnhancedHero = () => {
           </div>
 
           {/* Right Side - Enhanced Visual Element */}
-          <div className="relative hidden md:flex items-center justify-center">
+          <div className="relative hidden md:flex items-center justify-center h-full">
             {/* Enhanced Animated Circles */}
-            <div className="relative w-80 h-80">
+            <div className="relative w-96 h-96 lg:w-[450px] lg:h-[450px]">
               {/* Outer glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl animate-pulse scale-150" />
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl animate-pulse scale-125" />
 
-              {/* Rotating rings */}
-              <div className="absolute inset-4 rounded-full border-2 border-blue-500/40 animate-spin-slow backdrop-blur-sm" />
-              <div className="absolute inset-12 rounded-full border-2 border-purple-500/40 animate-spin-reverse backdrop-blur-sm" />
-              <div className="absolute inset-20 rounded-full border-2 border-cyan-500/30 animate-spin-slow animation-delay-1000 backdrop-blur-sm" />
+              {/* Rotating rings with better visibility */}
+              <div className="absolute inset-6 rounded-full border-2 border-blue-500/50 animate-spin-slow backdrop-blur-sm shadow-lg shadow-blue-500/10" />
+              <div className="absolute inset-16 rounded-full border-2 border-purple-500/50 animate-spin-reverse backdrop-blur-sm shadow-lg shadow-purple-500/10" />
+              <div className="absolute inset-24 rounded-full border border-cyan-500/40 animate-spin-slow animation-delay-1000 backdrop-blur-sm shadow-lg shadow-cyan-500/10" />
 
               {/* Center Avatar with enhanced styling */}
-              <div className="absolute inset-28 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center shadow-2xl border-4 border-white/20 backdrop-blur-sm">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 flex items-center justify-center text-slate-800 font-bold text-2xl shadow-inner">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center shadow-2xl border-4 border-white/20 backdrop-blur-sm">
+                <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-full bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center text-slate-800 font-bold text-3xl lg:text-4xl shadow-inner">
                   BP
                 </div>
               </div>
 
               {/* Enhanced Floating Tech Stack Icons */}
-              {techStack.map((tech, i) => (
-                <div
-                  key={tech}
-                  className="absolute bg-gradient-to-r from-slate-800/90 to-slate-900/90 backdrop-blur-md px-4 py-2 rounded-lg text-sm font-medium text-blue-300 border border-blue-500/30 shadow-lg animate-float hover:scale-105 transition-transform"
-                  style={{
-                    top: `${
-                      50 + 45 * Math.cos((i * 2 * Math.PI) / techStack.length)
-                    }%`,
-                    left: `${
-                      50 + 45 * Math.sin((i * 2 * Math.PI) / techStack.length)
-                    }%`,
-                    animationDelay: `${i * 0.5}s`,
-                    transform: "translate(-50%, -50%)",
-                  }}
-                >
-                  {tech}
-                </div>
-              ))}
+              {techStack.map((tech, i) => {
+                const angle = (i * 2 * Math.PI) / techStack.length;
+                const radius = 48; // percentage from center
+                return (
+                  <div
+                    key={tech}
+                    className="absolute bg-gradient-to-br from-slate-800/95 to-slate-900/95 backdrop-blur-md px-4 py-2 rounded-lg text-sm lg:text-base font-medium text-blue-300 border border-blue-500/40 shadow-xl animate-float hover:scale-110 hover:border-blue-400/60 transition-all duration-300 cursor-default"
+                    style={{
+                      top: `${50 + radius * Math.sin(angle)}%`,
+                      left: `${50 + radius * Math.cos(angle)}%`,
+                      animationDelay: `${i * 0.4}s`,
+                      transform: "translate(-50%, -50%)",
+                      animationDuration: "4s",
+                    }}
+                  >
+                    {tech}
+                  </div>
+                );
+              })}
 
-              {/* Additional floating elements */}
-              <div className="absolute top-8 right-8 w-3 h-3 bg-blue-400 rounded-full animate-ping" />
-              <div className="absolute bottom-8 left-8 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-              <div className="absolute top-1/2 left-4 w-1 h-1 bg-cyan-400 rounded-full animate-bounce" />
+              {/* Additional floating elements with better positioning */}
+              <div className="absolute top-8 right-12 w-3 h-3 bg-blue-400 rounded-full animate-ping" />
+              <div className="absolute bottom-12 left-12 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
+              <div className="absolute top-1/3 left-8 w-2 h-2 bg-cyan-400 rounded-full animate-bounce" />
+              <div className="absolute bottom-1/3 right-8 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" />
             </div>
           </div>
         </div>

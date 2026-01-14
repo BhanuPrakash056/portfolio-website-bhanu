@@ -173,7 +173,7 @@ const Footer = () => {
                 </motion.a>
 
                 <motion.a
-                  href="https://github.com/bhanu-pratap-r"
+                  href="https://github.com/bhanuprakash056"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 rounded-xl bg-slate-800/50 hover:bg-purple-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-slate-700 hover:border-purple-500"

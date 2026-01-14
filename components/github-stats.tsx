@@ -212,7 +212,7 @@ const GitHubStats = () => {
                   </span>
                 </div>
                 <a
-                  href={`https://github.com/bhanuprakash-r/${repo.name}`}
+                  href={`https://github.com/bhanuprakash056/${repo.name}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:text-primary/80 text-sm font-medium transition-colors"
@@ -232,7 +232,7 @@ const GitHubStats = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <a
-            href="https://github.com/bhanuprakash-r"
+            href="https://github.com/bhanuprakash056"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors font-medium"

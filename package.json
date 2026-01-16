@@ -11,7 +11,8 @@
     "format:check": "prettier --check .",
     "start": "next start",
     "preview": "next build && next start",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build --webpack",
+    "analyze:turbopack": "next experimental-analyze"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",

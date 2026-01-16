@@ -27,10 +27,6 @@ const config = {
   compress: true,
   // Enable production source maps for better debugging (optional, can disable for smaller bundles)
   productionBrowserSourceMaps: false,
-  // Optimize fonts
-  optimizeFonts: true,
-  // Enable SWC minification
-  swcMinify: true,
 };
 
 export default withBundleAnalyzer(config);

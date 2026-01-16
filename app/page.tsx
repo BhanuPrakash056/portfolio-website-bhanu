@@ -1,25 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LoadingScreen from "@/components/loading-screen";
 import Navigation from "@/components/navigation";
 import Hero from "@/components/hero";
-import About from "@/components/about";
-import Experience from "@/components/experience";
-import Skills from "@/components/skills";
-import Contact from "@/components/contact";
-import Footer from "@/components/footer";
+
+// Lazy load components below the fold for better initial load performance
+const About = lazy(() => import("@/components/about"));
+const Experience = lazy(() => import("@/components/experience"));
+const Skills = lazy(() => import("@/components/skills"));
+const Contact = lazy(() => import("@/components/contact"));
+const Footer = lazy(() => import("@/components/footer"));
+
+// Throttle function to limit mousemove event firing
+function throttle<T extends (...args: any[]) => void>(
+  func: T,
+  delay: number
+): (...args: Parameters<T>) => void {
+  let lastCall = 0;
+  return (...args: Parameters<T>) => {
+    const now = Date.now();
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      func(...args);
+    }
+  };
+}
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = throttle((e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
+    }, 16); // ~60fps
+    
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     // Simulate loading for 1.5s
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => {
@@ -57,11 +75,21 @@ export default function Home() {
             </div>
             <Navigation />
             <Hero />
-            <About />
-            <Experience /> 
-            <Skills />
-            <Contact />
-            <Footer />
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              <About />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              <Experience />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              <Skills />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              <Contact />
+            </Suspense>
+            <Suspense fallback={<div className="min-h-[400px]" />}>
+              <Footer />
+            </Suspense>
           </div>
         </motion.div>
       )}

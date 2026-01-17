@@ -2,7 +2,9 @@
 
 import { useState, useEffect, memo } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
 
 // Throttle function for scroll events
 function throttle<T extends (...args: any[]) => void>(
@@ -22,6 +24,12 @@ function throttle<T extends (...args: any[]) => void>(
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -69,7 +77,7 @@ const Navigation = () => {
         </motion.div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex gap-8 items-center">
           {navItems.map((item) => (
             <motion.button
               key={item}
@@ -80,6 +88,21 @@ const Navigation = () => {
               {item}
             </motion.button>
           ))}
+          {mounted && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="ml-2"
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -112,6 +135,25 @@ const Navigation = () => {
               {item}
             </motion.button>
           ))}
+          {mounted && (
+            <Button
+              variant="outline"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="w-full justify-start"
+            >
+              {theme === "dark" ? (
+                <>
+                  <Sun className="h-4 w-4 mr-2" />
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon className="h-4 w-4 mr-2" />
+                  Dark Mode
+                </>
+              )}
+            </Button>
+          )}
         </div>
       </motion.div>
     </motion.nav>

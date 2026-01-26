@@ -36,7 +36,7 @@ export default function Home() {
     const handleMouseMove = throttle((e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     }, 16); // ~60fps
-    
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
     // Simulate loading for 1.5s
     const timer = setTimeout(() => setLoading(false), 1500);
@@ -75,19 +75,19 @@ export default function Home() {
             </div>
             <Navigation />
             <Hero />
-            <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Suspense fallback={<div className="min-h-100" />}>
               <About />
             </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Suspense fallback={<div className="min-h-100" />}>
               <Experience />
             </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Suspense fallback={<div className="min-h-100" />}>
               <Skills />
             </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Suspense fallback={<div className="min-h-100" />}>
               <Contact />
             </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Suspense fallback={<div className="min-h-100" />}>
               <Footer />
             </Suspense>
           </div>

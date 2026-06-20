@@ -42,20 +42,20 @@ export default function Home() {
           <Suspense fallback={<div className="min-h-[400px]" />}>
             <About />
           </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
-              <Experience />
-            </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
-              <Skills />
-            </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
-              <Contact />
-            </Suspense>
-            <Suspense fallback={<div className="min-h-[400px]" />}>
-              <Footer />
-            </Suspense>
-          </div>
+          <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Experience />
+          </Suspense>
+          <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Skills />
+          </Suspense>
+          <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Contact />
+          </Suspense>
+          <Suspense fallback={<div className="min-h-[400px]" />}>
+            <Footer />
+          </Suspense>
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 }

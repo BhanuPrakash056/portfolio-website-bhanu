@@ -1,10 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { animate, createScope, stagger } from "animejs";
 import { useInView } from "react-intersection-observer";
+import { MapPin } from "lucide-react";
 
 const Experience = () => {
-  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
+  const { ref: inViewRef, inView } = useInView({ threshold: 0.1, triggerOnce: true });
+  const rootRef = useRef<HTMLElement>(null);
+  const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
+
+  const setRefs = (el: HTMLElement | null) => {
+    (rootRef as React.MutableRefObject<HTMLElement | null>).current = el;
+    inViewRef(el);
+  };
+
+  useEffect(() => {
+    if (!inView || !rootRef.current) return;
+    scopeRef.current = createScope({ root: rootRef }).add(() => {
+      animate(".exp-header", {
+        opacity: { from: 0, to: 1 },
+        translateY: { from: 20, to: 0 },
+        duration: 600,
+        ease: "outExpo",
+      });
+      animate(".exp-card", {
+        opacity: { from: 0, to: 1 },
+        translateX: { from: -20, to: 0 },
+        duration: 600,
+        delay: stagger(100, { start: 150 }),
+        ease: "outExpo",
+      });
+    });
+    return () => scopeRef.current?.revert();
+  }, [inView]);
 
   const experiences = [
     {
@@ -64,55 +93,35 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="py-20 px-4 md:px-0" ref={ref}>
+    <section id="experience" className="py-24 px-4 md:px-8 relative overflow-hidden" ref={setRefs}>
       <div className="max-w-6xl mx-auto">
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-        >
-          Professional Experience
-        </motion.h2>
+        <div className="exp-header text-center mb-16" style={{ opacity: 0 }}>
+          <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-3">Work History</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Professional Experience
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+            My journey building scalable products and impactful engineering solutions
+          </p>
+        </div>
 
         <div className="space-y-8">
           {experiences.map((exp, index) => (
-            <motion.div
+            <div
               key={index}
-              className="group relative"
-              initial={{ opacity: 0, x: -20 }}
-              animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="exp-card group"
+              style={{ opacity: 0 }}
             >
-              {/* Timeline Line */}
-              <div className="hidden lg:block absolute -left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-secondary to-transparent" />
-
-              {/* Timeline Dot */}
-              <motion.div
-                className="hidden lg:block absolute -left-14 top-0 w-6 h-6 rounded-full bg-primary border-4 border-background"
-                whileHover={{ scale: 1.2 }}
-              />
-
-              {/* Card */}
-              <motion.div
-                className="p-6 rounded-lg bg-card border border-border hover:border-primary transition-all"
-                whileHover={{
-                  y: -5,
-                  boxShadow: "0 20px 25px rgba(59, 130, 246, 0.1)",
-                }}
-              >
+              <div className="p-6 rounded-lg bg-card border border-border hover:border-primary hover:-translate-y-1 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-3">
                   <div>
-                    <h3 className="text-xl font-bold text-foreground">
-                      {exp.title}
-                    </h3>
+                    <h3 className="text-xl font-bold text-foreground">{exp.title}</h3>
                     <p className="text-primary font-semibold">{exp.company}</p>
                   </div>
                   <span className="text-foreground/60 text-sm md:text-right mt-2 md:mt-0">
                     {exp.period}
                   </span>
                 </div>
-
                 <ul className="text-foreground/70 mb-4 leading-relaxed space-y-2">
                   {exp.description.map((bullet, i) => (
                     <li key={i} className="flex items-start">
@@ -121,20 +130,18 @@ const Experience = () => {
                     </li>
                   ))}
                 </ul>
-
                 <div className="flex flex-wrap gap-2">
                   {exp.skills.map((skill) => (
-                    <motion.span
+                    <span
                       key={skill}
-                      className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium"
-                      whileHover={{ scale: 1.05 }}
+                      className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium hover:scale-105 transition-transform"
                     >
                       {skill}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

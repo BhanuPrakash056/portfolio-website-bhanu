@@ -1,14 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
   Github,
   Linkedin,
   Mail,
   MapPin,
-  Phone,
   Code,
-  Cloud,
   Zap,
   ExternalLink,
 } from "lucide-react";
@@ -41,14 +38,8 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
             {/* Brand & Bio */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="lg:col-span-2"
-            >
-              <h3 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-4">
+            <div className="lg:col-span-2">
+              <h3 className="text-2xl font-bold text-foreground mb-4">
                 Bhanu Prakash R
               </h3>
               <p className="text-foreground/70 mb-6 leading-relaxed max-w-md">
@@ -73,15 +64,10 @@ const Footer = () => {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Services */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Code size={18} className="text-primary" />
                 Services
@@ -95,15 +81,10 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
 
             {/* Technologies */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <h4 className="font-semibold text-foreground mb-4 flex items-center gap-2">
                 <Zap size={18} className="text-primary" />
                 Technologies
@@ -117,18 +98,13 @@ const Footer = () => {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           </div>
 
           {/* Quick Links & Social */}
           <div className="grid md:grid-cols-2 gap-8 mb-8">
             {/* Quick Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <h4 className="font-semibold text-foreground mb-4">
                 Quick Links
               </h4>
@@ -150,51 +126,43 @@ const Footer = () => {
                   </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
             {/* Social & Connect */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
+            <div>
               <h4 className="font-semibold text-foreground mb-4">Connect</h4>
               <div className="flex gap-3 mb-4">
-                <motion.a
+                <a
                   href="https://linkedin.com/in/bhanuprakash-r"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-blue-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-slate-700 hover:border-blue-500"
-                  whileHover={{ scale: 1.05 }}
+                  className="p-2.5 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-card transition-all"
                   aria-label="LinkedIn Profile"
                 >
-                  <Linkedin size={20} />
-                </motion.a>
+                  <Linkedin size={18} />
+                </a>
 
-                <motion.a
+                <a
                   href="https://github.com/bhanuprakash056"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-purple-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-slate-700 hover:border-purple-500"
-                  whileHover={{ scale: 1.05 }}
+                  className="p-2.5 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-card transition-all"
                   aria-label="GitHub Profile"
                 >
-                  <Github size={20} />
-                </motion.a>
+                  <Github size={18} />
+                </a>
 
-                <motion.a
+                <a
                   href="mailto:bp71712@gmail.com"
-                  className="p-3 rounded-xl bg-slate-800/50 hover:bg-pink-600 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 backdrop-blur-sm border border-slate-700 hover:border-pink-500"
-                  whileHover={{ scale: 1.05 }}
+                  className="p-2.5 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-card transition-all"
                   aria-label="Email Bhanu Prakash R"
                 >
-                  <Mail size={20} />
-                </motion.a>
+                  <Mail size={18} />
+                </a>
               </div>
 
               {/* Call to Action */}
-              <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg p-4 border border-primary/20">
+              <div className="rounded-lg p-4 border border-border bg-card/50">
                 <p className="text-sm text-foreground/80 mb-2">
                   Ready to start a project?
                 </p>
@@ -205,19 +173,13 @@ const Footer = () => {
                   Let's talk <ExternalLink size={14} />
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <motion.div
-        className="py-6 px-4 md:px-0 border-t border-border"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.5 }}
-        viewport={{ once: true }}
-      >
+      <div className="py-6 px-4 md:px-0 border-t border-border">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-foreground/60 text-sm">
           <div className="flex flex-col md:flex-row items-center gap-4 mb-4 md:mb-0">
             <p>&copy; {currentYear} Bhanu Prakash R. All rights reserved.</p>
@@ -238,7 +200,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 };

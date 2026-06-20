@@ -1,365 +1,167 @@
-import { useEffect, useState } from "react";
-import {
-  Github,
-  Linkedin,
-  Mail,
-  ChevronDown,
-  MapPin,
-  Code,
-  Rocket,
-} from "lucide-react";
+"use client";
 
-const EnhancedHero = () => {
-  const [displayedText, setDisplayedText] = useState("");
-  const [currentRole, setCurrentRole] = useState(0);
+import { useEffect, useRef, useState } from "react";
+import { animate, createScope, stagger } from "animejs";
+import { Github, Linkedin, Mail, ArrowUpRight, ChevronDown } from "lucide-react";
+
+const ModernHero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const rootRef = useRef<HTMLElement>(null);
+  const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
 
-  const roles = [
-    "Full Stack Software Engineer",
-    "DevOps Enthusiast",
-    "Cloud Architecture Specialist",
-    "React & Next.js Expert",
+  const stats = [
+    { value: "2+", label: "Years Experience" },
+    { value: "15+", label: "Projects Delivered" },
+    { value: "20+", label: "Technologies" },
+    { value: "5+", label: "Certifications" },
   ];
 
-  const techStack = [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "AWS",
-    "Docker",
-    "Node.js",
-  ];
-
-  // Typing animation for current role
   useEffect(() => {
-    let index = 0;
-    const currentText = roles[currentRole];
-    setDisplayedText("");
-
-    const timer = setInterval(() => {
-      if (index < currentText.length) {
-        setDisplayedText(currentText.slice(0, index + 1));
-        index++;
-      } else {
-        clearInterval(timer);
-        setTimeout(() => {
-          setCurrentRole((prev) => (prev + 1) % roles.length);
-        }, 2000);
-      }
-    }, 50);
-
-    return () => clearInterval(timer);
-  }, [currentRole]);
-
-  // Mouse move effect for spotlight
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: MouseEvent) =>
       setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-950 via-blue-950 to-slate-900 px-4">
-      {/* Enhanced Animated Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e510_1px,transparent_1px),linear-gradient(to_bottom,#4f46e510_1px,transparent_1px)] bg-[size:4rem_4rem] animate-pulse" />
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-purple-500/5" />
-      </div>
+  useEffect(() => {
+    if (!rootRef.current) return;
+    scopeRef.current = createScope({ root: rootRef }).add(() => {
+      animate(".hero-badge", { opacity: { from: 0, to: 1 }, translateY: { from: 10, to: 0 }, duration: 600, delay: 200, ease: "outExpo" });
+      animate(".hero-name", { opacity: { from: 0, to: 1 }, translateY: { from: 30, to: 0 }, duration: 800, delay: 350, ease: "outExpo" });
+      animate(".hero-subtitle", { opacity: { from: 0, to: 1 }, translateY: { from: 20, to: 0 }, duration: 700, delay: 500, ease: "outExpo" });
+      animate(".hero-desc", { opacity: { from: 0, to: 1 }, translateY: { from: 20, to: 0 }, duration: 700, delay: 600, ease: "outExpo" });
+      animate(".hero-cta", { opacity: { from: 0, to: 1 }, translateY: { from: 15, to: 0 }, duration: 600, delay: 700, ease: "outExpo" });
+      animate(".hero-social", { opacity: { from: 0, to: 1 }, translateY: { from: 10, to: 0 }, duration: 500, delay: stagger(60, { start: 850 }), ease: "outExpo" });
+      animate(".hero-stat", { opacity: { from: 0, to: 1 }, translateY: { from: 10, to: 0 }, duration: 500, delay: stagger(80, { start: 1050 }), ease: "outExpo" });
+    });
+    return () => scopeRef.current?.revert();
+  }, []);
 
-      {/* Enhanced Spotlight Effect */}
+  return (
+    <section
+      ref={rootRef}
+      className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 py-24 overflow-hidden bg-background"
+    >
+      {/* Subtle grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:72px_72px] pointer-events-none" />
+
+      {/* Single soft glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-primary/8 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Mouse spotlight */}
       <div
-        className="absolute inset-0 opacity-20 pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(800px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.08), rgba(147, 51, 234, 0.06), transparent 50%)`,
+          background: `radial-gradient(500px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(99,102,241,0.06), transparent 70%)`,
         }}
       />
 
-      {/* Enhanced Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-gradient-to-r from-blue-400/40 to-purple-400/40 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 12}s`,
-            }}
-          />
-        ))}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={`large-${i}`}
-            className="absolute w-2 h-2 bg-gradient-to-r from-cyan-400/20 to-pink-400/20 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${12 + Math.random() * 8}s`,
-            }}
-          />
-        ))}
-      </div>
+      {/* Content */}
+      <div className="relative z-10 max-w-3xl mx-auto w-full flex flex-col items-center">
+        {/* Status badge */}
+        <div
+          className="hero-badge inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-border bg-card/60 text-muted-foreground text-sm font-medium mb-10"
+          style={{ opacity: 0 }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          Available for new opportunities
+        </div>
 
-      {/* Geometric Shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-32 h-32 border border-blue-500/20 rounded-full animate-spin-slow" />
-        <div className="absolute top-40 right-20 w-24 h-24 border border-purple-500/20 rounded-lg rotate-45 animate-spin-reverse" />
-        <div className="absolute bottom-32 left-1/4 w-16 h-16 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full animate-pulse" />
-        <div className="absolute bottom-20 right-1/3 w-20 h-20 border border-cyan-500/20 rounded-full animate-bounce" />
-      </div>
+        {/* Name */}
+        <h1
+          className="hero-name text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-foreground leading-[1.05] mb-5"
+          style={{ opacity: 0 }}
+        >
+          Bhanu Prakash R
+        </h1>
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-6xl mx-auto px-4 py-20">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Content */}
-          <div className="space-y-8 text-center md:text-left">
-            {/* Enhanced Status Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 text-green-400 text-sm font-medium backdrop-blur-sm animate-pulse-slow shadow-lg shadow-green-500/10">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-ping" />
-              <div className="w-2 h-2 bg-green-400 rounded-full absolute animate-pulse" />
-              Available for exciting opportunities
-            </div>
+        {/* Role */}
+        <div
+          className="hero-subtitle flex items-center gap-4 mb-6"
+          style={{ opacity: 0 }}
+        >
+          <span className="h-px w-8 bg-border" />
+          <span className="text-base sm:text-lg font-medium text-primary tracking-wide">
+            Full Stack Software Engineer
+          </span>
+          <span className="h-px w-8 bg-border" />
+        </div>
 
-            {/* Enhanced Name with Better Gradient */}
-            <div className="space-y-4">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient leading-tight">
-                Bhanu Prakash R
-              </h1>
-              <p className="text-lg md:text-xl text-slate-400 font-medium max-w-lg mx-auto md:mx-0 leading-relaxed">
-                Crafting impactful digital experiences with code, creativity,
-                and cloud innovation.
-              </p>
-              {/* Enhanced Dynamic Role */}
-              <div className="h-16 sm:h-20 md:h-24 flex items-center justify-center md:justify-start">
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-blue-300 flex items-center gap-2 flex-wrap">
-                  <span className="text-blue-400">&lt;/</span>
-                  {displayedText}
-                  <span className="w-1 h-6 sm:h-8 md:h-10 bg-gradient-to-b from-blue-400 to-purple-400 animate-blink rounded-full" />
-                  <span className="text-purple-400">&gt;</span>
-                </h2>
+        {/* Description */}
+        <p
+          className="hero-desc text-base sm:text-lg text-muted-foreground max-w-xl leading-relaxed mb-10"
+          style={{ opacity: 0 }}
+        >
+          Building scalable web applications and DevOps solutions at{" "}
+          <span className="text-foreground font-medium">Elanco</span>. Passionate
+          about clean architecture, performance, and developer experience.
+        </p>
+
+        {/* CTAs */}
+        <div
+          className="hero-cta flex flex-wrap gap-3 justify-center mb-10"
+          style={{ opacity: 0 }}
+        >
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 hover:gap-3 transition-all"
+          >
+            Get In Touch
+            <ArrowUpRight size={15} />
+          </a>
+          <a
+            href="#experience"
+            className="inline-flex items-center px-6 py-3 rounded-lg border border-border text-foreground text-sm font-semibold hover:bg-card hover:border-primary/40 transition-all"
+          >
+            View Experience
+          </a>
+        </div>
+
+        {/* Social links */}
+        <div className="flex justify-center gap-2 mb-16">
+          {[
+            { icon: Github, href: "https://github.com/BhanuPrakash056", label: "GitHub" },
+            { icon: Linkedin, href: "https://linkedin.com/in/bhanu-prakash-r", label: "LinkedIn" },
+            { icon: Mail, href: "mailto:bp71712@gmail.com", label: "Email" },
+          ].map((s, i) => (
+            <a
+              key={i}
+              href={s.href}
+              target={s.href.startsWith("mailto") ? undefined : "_blank"}
+              rel="noopener noreferrer"
+              aria-label={s.label}
+              className="hero-social p-2.5 rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-primary/50 hover:bg-card transition-all"
+              style={{ opacity: 0 }}
+            >
+              <s.icon size={18} />
+            </a>
+          ))}
+        </div>
+
+        {/* Stats bar */}
+        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-px bg-border rounded-xl overflow-hidden">
+          {stats.map((stat, i) => (
+            <div
+              key={i}
+              className="hero-stat py-6 px-4 text-center bg-card/70"
+              style={{ opacity: 0 }}
+            >
+              <div className="text-2xl sm:text-3xl font-bold text-foreground mb-1">
+                {stat.value}
               </div>
+              <div className="text-xs text-muted-foreground">{stat.label}</div>
             </div>
-
-            {/* Enhanced Description */}
-            <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700/50 shadow-xl">
-              <p className="text-lg text-slate-300 leading-relaxed mb-4">
-                Passionate full-stack engineer specializing in scalable web
-                applications and DevOps solutions. Currently driving innovation
-                at{" "}
-                <span className="text-blue-400 font-semibold bg-blue-500/10 px-2 py-1 rounded-md">
-                  Elanco
-                </span>
-                , building cloud-native applications and optimizing development
-                workflows.
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium">
-                  Full Stack Expert
-                </span>
-                <span className="px-3 py-1 bg-purple-500/10 text-purple-300 rounded-full text-sm font-medium">
-                  Cloud Architect
-                </span>
-                <span className="px-3 py-1 bg-green-500/10 text-green-300 rounded-full text-sm font-medium">
-                  DevOps Specialist
-                </span>
-              </div>
-            </div>
-
-            {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a
-                href="#contact"
-                className="group relative px-8 py-4 rounded-xl bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 text-white font-semibold shadow-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 transform hover:scale-105 overflow-hidden"
-                aria-label="Contact Bhanu Prakash R"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative flex items-center justify-center gap-2">
-                  <Rocket className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  Let's Work Together
-                </div>
-              </a>
-
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group px-8 py-4 rounded-xl border-2 border-blue-500/50 text-blue-400 font-semibold hover:bg-blue-500/10 hover:border-blue-400 transition-all duration-300 transform hover:scale-105 backdrop-blur-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/20"
-                aria-label="View Resume PDF"
-              >
-                <Code className="w-5 h-5 group-hover:rotate-12 transition-transform" />
-                View Resume
-              </a>
-            </div>
-
-            {/* Enhanced Social Links */}
-            <div className="flex gap-4 justify-center md:justify-start">
-              <a
-                href="https://linkedin.com/in/bhanuprakash-r"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-blue-600 hover:to-blue-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-blue-500 shadow-lg hover:shadow-blue-500/30"
-                aria-label="LinkedIn Profile"
-              >
-                <div className="absolute inset-0 bg-blue-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-                <Linkedin className="relative w-6 h-6" size={24} />
-              </a>
-
-              <a
-                href="https://github.com/bhanuprakash056"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-purple-600 hover:to-purple-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-purple-500 shadow-lg hover:shadow-purple-500/30"
-                aria-label="GitHub Profile"
-              >
-                <div className="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-                <Github className="relative w-6 h-6" size={24} />
-              </a>
-
-              <a
-                href="mailto:bp71712@gmail.com"
-                className="group relative p-4 rounded-xl bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-pink-600 hover:to-pink-700 text-slate-300 hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 backdrop-blur-sm border border-slate-700 hover:border-pink-500 shadow-lg hover:shadow-pink-500/30"
-                aria-label="Email Bhanu Prakash R"
-              >
-                <div className="absolute inset-0 bg-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl" />
-                <Mail className="relative w-6 h-6" size={24} />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Side - Enhanced Visual Element */}
-          <div className="relative hidden md:flex items-center justify-center h-full">
-            {/* Enhanced Animated Circles */}
-            <div className="relative w-96 h-96 lg:w-[450px] lg:h-[450px]">
-              {/* Outer glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-3xl animate-pulse scale-125" />
-
-              {/* Rotating rings with better visibility */}
-              <div className="absolute inset-6 rounded-full border-2 border-blue-500/50 animate-spin-slow backdrop-blur-sm shadow-lg shadow-blue-500/10" />
-              <div className="absolute inset-16 rounded-full border-2 border-purple-500/50 animate-spin-reverse backdrop-blur-sm shadow-lg shadow-purple-500/10" />
-              <div className="absolute inset-24 rounded-full border border-cyan-500/40 animate-spin-slow animation-delay-1000 backdrop-blur-sm shadow-lg shadow-cyan-500/10" />
-
-              {/* Center Avatar with enhanced styling */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 lg:w-40 lg:h-40 rounded-full bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 flex items-center justify-center shadow-2xl border-4 border-white/20 backdrop-blur-sm">
-                <div className="w-24 h-24 lg:w-32 lg:h-32 rounded-full bg-gradient-to-br from-slate-100 to-slate-300 flex items-center justify-center text-slate-800 font-bold text-3xl lg:text-4xl shadow-inner">
-                  BP
-                </div>
-              </div>
-
-              {/* Enhanced Floating Tech Stack Icons */}
-              {techStack.map((tech, i) => {
-                const angle = (i * 2 * Math.PI) / techStack.length;
-                const radius = 48; // percentage from center
-                return (
-                  <div
-                    key={tech}
-                    className="absolute bg-gradient-to-br from-slate-800/95 to-slate-900/95 backdrop-blur-md px-4 py-2 rounded-lg text-sm lg:text-base font-medium text-blue-300 border border-blue-500/40 shadow-xl animate-float hover:scale-110 hover:border-blue-400/60 transition-all duration-300 cursor-default"
-                    style={{
-                      top: `${50 + radius * Math.sin(angle)}%`,
-                      left: `${50 + radius * Math.cos(angle)}%`,
-                      animationDelay: `${i * 0.4}s`,
-                      transform: "translate(-50%, -50%)",
-                      animationDuration: "4s",
-                    }}
-                  >
-                    {tech}
-                  </div>
-                );
-              })}
-
-              {/* Additional floating elements with better positioning */}
-              <div className="absolute top-8 right-12 w-3 h-3 bg-blue-400 rounded-full animate-ping" />
-              <div className="absolute bottom-12 left-12 w-2 h-2 bg-purple-400 rounded-full animate-pulse" />
-              <div className="absolute top-1/3 left-8 w-2 h-2 bg-cyan-400 rounded-full animate-bounce" />
-              <div className="absolute bottom-1/3 right-8 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
-        <ChevronDown className="text-blue-400" size={32} />
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
+        <span className="text-[10px] tracking-[0.2em] uppercase text-muted-foreground/40">Scroll</span>
+        <ChevronDown size={14} className="text-muted-foreground/30 animate-bounce" />
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0) translateX(0);
-          }
-          50% {
-            transform: translateY(-20px) translateX(10px);
-          }
-        }
-        @keyframes gradient {
-          0%,
-          100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-        @keyframes blink {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-        }
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        @keyframes spin-reverse {
-          from {
-            transform: rotate(360deg);
-          }
-          to {
-            transform: rotate(0deg);
-          }
-        }
-        @keyframes pulse-slow {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.5;
-          }
-        }
-        .animate-float {
-          animation: float linear infinite;
-        }
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-        .animate-blink {
-          animation: blink 1s step-end infinite;
-        }
-        .animate-spin-slow {
-          animation: spin-slow 20s linear infinite;
-        }
-        .animate-spin-reverse {
-          animation: spin-reverse 15s linear infinite;
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 2s ease-in-out infinite;
-        }
-      `}</style>
     </section>
   );
 };
 
-export default EnhancedHero;
+export default ModernHero;

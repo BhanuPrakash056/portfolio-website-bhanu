@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, memo } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef, memo } from "react";
+import { animate } from "animejs";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
@@ -26,9 +26,24 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const isFirstOpen = useRef(true);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  // Nav entrance
+  useEffect(() => {
+    if (navRef.current) {
+      animate(navRef.current, {
+        translateY: { from: -100, to: 0 },
+        opacity: { from: 0, to: 1 },
+        duration: 500,
+        ease: "outExpo",
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -40,6 +55,42 @@ const Navigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Mobile menu open/close animation
+  useEffect(() => {
+    const menu = mobileMenuRef.current;
+    if (!menu) return;
+
+    if (isFirstOpen.current && !isOpen) {
+      // Don't animate on first render when closed
+      menu.style.maxHeight = "0px";
+      menu.style.opacity = "0";
+      menu.style.overflow = "hidden";
+      isFirstOpen.current = false;
+      return;
+    }
+    isFirstOpen.current = false;
+
+    if (isOpen) {
+      menu.style.display = "block";
+      animate(menu, {
+        maxHeight: { from: 0, to: 400 },
+        opacity: { from: 0, to: 1 },
+        duration: 300,
+        ease: "outQuad",
+      });
+    } else {
+      animate(menu, {
+        maxHeight: { to: 0 },
+        opacity: { to: 0 },
+        duration: 250,
+        ease: "inQuad",
+        onComplete: () => {
+          if (menu) menu.style.display = "none";
+        },
+      });
+    }
+  }, [isOpen]);
+
   const navItems = ["Home", "About", "Experience", "Skills", "Contact"];
 
   const scrollToSection = (id: string) => {
@@ -48,7 +99,7 @@ const Navigation = () => {
     } else {
       const element = document.getElementById(id);
       if (element) {
-        const offset = 80; // Account for fixed navbar height
+        const offset = 80;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - offset;
         window.scrollTo({ top: offsetPosition, behavior: "smooth" });
@@ -58,35 +109,33 @@ const Navigation = () => {
   };
 
   return (
-    <motion.nav
+    <nav
+      ref={navRef}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 backdrop-blur-md border-b border-border"
           : "bg-transparent"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+      style={{ opacity: 0 }}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <motion.div
-          className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-          whileHover={{ scale: 1.05 }}
+        <div
+          className="text-xl font-bold text-foreground hover:text-primary transition-colors cursor-pointer tracking-tight"
+          onClick={() => scrollToSection("home")}
         >
           BP
-        </motion.div>
+        </div>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex gap-8 items-center">
           {navItems.map((item) => (
-            <motion.button
+            <button
               key={item}
               onClick={() => scrollToSection(item.toLowerCase())}
-              className="text-foreground/70 hover:text-foreground transition-colors"
-              whileHover={{ x: 2 }}
+              className="text-foreground/70 hover:text-foreground hover:translate-x-0.5 transition-all"
             >
               {item}
-            </motion.button>
+            </button>
           ))}
           {mounted && (
             <Button
@@ -107,33 +156,30 @@ const Navigation = () => {
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
-          <motion.button
-            className="text-foreground"
+          <button
+            className="text-foreground hover:scale-110 transition-transform"
             onClick={() => setIsOpen(!isOpen)}
-            whileHover={{ scale: 1.1 }}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
+          </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <motion.div
+      <div
+        ref={mobileMenuRef}
         className="md:hidden overflow-hidden"
-        initial={{ height: 0 }}
-        animate={{ height: isOpen ? "auto" : 0 }}
-        transition={{ duration: 0.3 }}
+        style={{ maxHeight: 0, opacity: 0 }}
       >
         <div className="bg-background/95 backdrop-blur-md border-b border-border px-4 py-4 space-y-4">
           {navItems.map((item) => (
-            <motion.button
+            <button
               key={item}
               onClick={() => scrollToSection(item.toLowerCase())}
-              className="block w-full text-left text-foreground/70 hover:text-foreground transition-colors py-2"
-              whileHover={{ x: 4 }}
+              className="block w-full text-left text-foreground/70 hover:text-foreground hover:translate-x-1 transition-all py-2"
             >
               {item}
-            </motion.button>
+            </button>
           ))}
           {mounted && (
             <Button
@@ -155,8 +201,8 @@ const Navigation = () => {
             </Button>
           )}
         </div>
-      </motion.div>
-    </motion.nav>
+      </div>
+    </nav>
   );
 };
 

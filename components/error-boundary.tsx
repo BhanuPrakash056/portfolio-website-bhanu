@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { AlertTriangle, RefreshCw, Home } from "lucide-react";
-import { motion } from "framer-motion";
+import { animate } from "animejs";
 
 interface ErrorBoundaryState {
   hasError: boolean;
@@ -63,22 +63,38 @@ const DefaultErrorFallback: React.FC<{
   error?: Error;
   resetError: () => void;
 }> = ({ error, resetError }) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (wrapperRef.current) {
+      animate(wrapperRef.current, {
+        opacity: { from: 0, to: 1 },
+        translateY: { from: 20, to: 0 },
+        duration: 600,
+        ease: "outExpo",
+      });
+    }
+    if (iconRef.current) {
+      animate(iconRef.current, {
+        scale: { from: 0, to: 1 },
+        duration: 500,
+        delay: 200,
+        ease: "outBack(1.5)",
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center px-4">
-      <motion.div
-        className="text-center max-w-md"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <motion.div
+      <div ref={wrapperRef} className="text-center max-w-md" style={{ opacity: 0 }}>
+        <div
+          ref={iconRef}
           className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-6"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+          style={{ scale: "0" }}
         >
           <AlertTriangle className="w-10 h-10 text-red-500" />
-        </motion.div>
+        </div>
 
         <h1 className="text-2xl font-bold text-foreground mb-2">
           Oops! Something went wrong
@@ -101,31 +117,27 @@ const DefaultErrorFallback: React.FC<{
         )}
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <motion.button
+          <button
             onClick={resetError}
-            className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-primary/90 hover:scale-105 active:scale-95 transition-all"
           >
             <RefreshCw size={18} />
             Try Again
-          </motion.button>
+          </button>
 
-          <motion.a
+          <a
             href="/"
-            className="px-6 py-3 bg-muted text-muted-foreground rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-muted/80 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="px-6 py-3 bg-muted text-muted-foreground rounded-lg font-medium flex items-center justify-center gap-2 hover:bg-muted/80 hover:scale-105 active:scale-95 transition-all"
           >
             <Home size={18} />
             Go Home
-          </motion.a>
+          </a>
         </div>
 
         <p className="text-xs text-muted-foreground mt-6">
           If this problem persists, please contact support.
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 };

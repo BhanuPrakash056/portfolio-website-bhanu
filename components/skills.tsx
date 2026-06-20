@@ -1,11 +1,39 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { animate, createScope, stagger } from "animejs";
 import { useInView } from "react-intersection-observer";
 import { Code2, Database, Cloud, Zap, GitBranch, Shield } from "lucide-react";
 
 const Skills = () => {
-  const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
+  const { ref: inViewRef, inView } = useInView({ threshold: 0.15, triggerOnce: true });
+  const rootRef = useRef<HTMLElement>(null);
+  const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
+
+  const setRefs = (el: HTMLElement | null) => {
+    (rootRef as React.MutableRefObject<HTMLElement | null>).current = el;
+    inViewRef(el);
+  };
+
+  useEffect(() => {
+    if (!inView || !rootRef.current) return;
+    scopeRef.current = createScope({ root: rootRef }).add(() => {
+      animate(".skills-header", {
+        opacity: { from: 0, to: 1 },
+        translateY: { from: 20, to: 0 },
+        duration: 600,
+        ease: "outExpo",
+      });
+      animate(".skill-card", {
+        opacity: { from: 0, to: 1 },
+        translateY: { from: 20, to: 0 },
+        duration: 600,
+        delay: stagger(80, { start: 150 }),
+        ease: "outExpo",
+      });
+    });
+    return () => scopeRef.current?.revert();
+  }, [inView]);
 
   const skillCategories = [
     {
@@ -66,79 +94,48 @@ const Skills = () => {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   return (
-    <section id="skills" className="py-20 px-4 md:px-0" ref={ref}>
+    <section id="skills" className="py-24 px-4 md:px-8 relative overflow-hidden" ref={setRefs}>
       <div className="max-w-6xl mx-auto">
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
-        >
-          Skills & Expertise
-        </motion.h2>
+        <div className="skills-header text-center mb-16" style={{ opacity: 0 }}>
+          <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-3">Technical Skills</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+            Skills &amp; Expertise
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
+            Technologies and tools I use to build modern, scalable applications
+          </p>
+        </div>
 
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-        >
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category) => {
             const IconComponent = category.icon;
             return (
-              <motion.div
+              <div
                 key={category.title}
-                className="p-6 rounded-lg bg-card border border-border hover:border-primary transition-all group"
-                variants={itemVariants}
-                whileHover={{ y: -8 }}
+                className="skill-card p-6 rounded-lg bg-card border border-border hover:border-primary hover:-translate-y-2 transition-all duration-300 group"
+                style={{ opacity: 0 }}
               >
-                {/* Icon */}
-                <div
-                  className={`inline-block p-3 rounded-lg bg-gradient-to-r ${category.color} mb-4 group-hover:scale-110 transition-transform`}
-                >
+                <div className={`inline-block p-3 rounded-lg bg-gradient-to-r ${category.color} mb-4 group-hover:scale-110 transition-transform`}>
                   <IconComponent className="text-white" size={24} />
                 </div>
-
-                <h3 className="text-xl font-bold text-foreground mb-4">
-                  {category.title}
-                </h3>
+                <h3 className="text-xl font-bold text-foreground mb-4">{category.title}</h3>
 
                 {/* Skills Grid */}
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <motion.span
+                    <span
                       key={skill}
-                      className="px-3 py-1 rounded-full bg-foreground/5 text-foreground/70 text-sm font-medium border border-border/50 group-hover:border-primary/50 transition-colors"
-                      whileHover={{
-                        scale: 1.05,
-                        backgroundColor: "rgba(59, 130, 246, 0.1)",
-                      }}
+                      className="px-3 py-1 rounded-full bg-foreground/5 text-foreground/70 text-sm font-medium border border-border/50 group-hover:border-primary/50 hover:scale-105 hover:bg-primary/10 transition-all"
                     >
                       {skill}
-                    </motion.span>
+                    </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

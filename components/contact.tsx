@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { useState, useEffect, useRef } from "react";
-import { animate, createScope, stagger } from "animejs";
+import { animate, createScope, stagger, splitText } from "animejs";
 import { useInView } from "react-intersection-observer";
 import {
   Mail,
@@ -24,6 +24,8 @@ const Contact = () => {
   const { ref: inViewRef, inView } = useInView({ threshold: 0.15, triggerOnce: true });
   const rootRef = useRef<HTMLElement>(null);
   const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
+  const h2Ref = useRef<HTMLHeadingElement>(null);
+  const splitterRef = useRef<{ chars: Element[]; revert: () => void } | null>(null);
 
   const setRefs = (el: HTMLElement | null) => {
     (rootRef as React.MutableRefObject<HTMLElement | null>).current = el;
@@ -53,8 +55,22 @@ const Contact = () => {
         delay: 200,
         ease: "outExpo",
       });
+
+      // ── splitText: chars slide up from clip on section h2 ───────────────
+      if (h2Ref.current) {
+        splitterRef.current = splitText(h2Ref.current, { chars: { wrap: "clip" } }) as { chars: Element[]; revert: () => void };
+        animate(splitterRef.current.chars, {
+          y: ["110%", "0%"],
+          duration: 600,
+          delay: stagger(22, { start: 120 }),
+          ease: "outExpo",
+        });
+      }
     });
-    return () => scopeRef.current?.revert();
+    return () => {
+      scopeRef.current?.revert();
+      splitterRef.current?.revert();
+    };
   }, [inView]);
   const [formData, setFormData] = useState({
     name: "",
@@ -166,7 +182,7 @@ const Contact = () => {
         {/* Section Header */}
         <div className="contact-header text-center mb-16" style={{ opacity: 0 }}>
           <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-3">Get In Touch</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 ref={h2Ref} className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
             Let's Work Together
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">

@@ -91,7 +91,7 @@ const Navigation = () => {
     }
   }, [isOpen]);
 
-  const navItems = ["Home", "About", "Experience", "Skills", "Contact"];
+  const navItems = ["Home", "About", "Experience", "Projects", "Skills", "Contact"];
 
   const scrollToSection = (id: string) => {
     if (id === "home") {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { animate, createScope, stagger } from "animejs";
+import { animate, createScope, stagger, splitText } from "animejs";
 import { useInView } from "react-intersection-observer";
 import {
   Code2,
@@ -18,6 +18,8 @@ const About = () => {
   const { ref: inViewRef, inView } = useInView({ threshold: 0.15, triggerOnce: true });
   const rootRef = useRef<HTMLElement>(null);
   const scopeRef = useRef<ReturnType<typeof createScope> | null>(null);
+  const h2Ref = useRef<HTMLHeadingElement>(null);
+  const splitterRef = useRef<{ chars: Element[]; revert: () => void } | null>(null);
 
   const coreValues = [
     { icon: Code2, title: "Clean Code", desc: "Write maintainable, elegant solutions" },
@@ -61,8 +63,22 @@ const About = () => {
         delay: stagger(80, { start: 450 }),
         ease: "outExpo",
       });
+
+      // ── splitText: chars slide up from clip on section h2 ───────────────
+      if (h2Ref.current) {
+        splitterRef.current = splitText(h2Ref.current, { chars: { wrap: "clip" } }) as { chars: Element[]; revert: () => void };
+        animate(splitterRef.current.chars, {
+          y: ["110%", "0%"],
+          duration: 600,
+          delay: stagger(22, { start: 120 }),
+          ease: "outExpo",
+        });
+      }
     });
-    return () => scopeRef.current?.revert();
+    return () => {
+      scopeRef.current?.revert();
+      splitterRef.current?.revert();
+    };
   }, [inView]);
 
   return (
@@ -80,7 +96,7 @@ const About = () => {
         {/* Section Header */}
         <div className="about-header text-center mb-16" style={{ opacity: 0 }}>
           <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-3">About Me</p>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 ref={h2Ref} className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
             Building Digital Excellence
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">

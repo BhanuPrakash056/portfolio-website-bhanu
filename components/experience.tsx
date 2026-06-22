@@ -71,7 +71,7 @@ interface EntryProps {
 }
 
 const ExperienceEntry = ({ exp, index, total }: EntryProps) => {
-  const { ref, inView } = useInView({ threshold: 0.15, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.05, triggerOnce: true, rootMargin: "0px 0px -40px 0px" });
   const dotRef  = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const connRef = useRef<HTMLDivElement>(null);
@@ -87,27 +87,27 @@ const ExperienceEntry = ({ exp, index, total }: EntryProps) => {
     if (dotRef.current) {
       tl.add(dotRef.current, {
         scale: { from: 0, to: 1 },
-        duration: 400,
+        duration: 280,
         ease: "outBack(2.5)",
       });
     }
 
-    // 2. Card slides in from the right (starts 60 ms after dot)
+    // 2. Card slides in from the right (starts 40 ms after dot)
     if (cardRef.current) {
       tl.add(cardRef.current, {
         opacity: { from: 0, to: 1 },
         translateX: { from: 40, to: 0 },
-        duration: 620,
-      }, dotRef.current ? "<+=60" : 0);
+        duration: 380,
+      }, dotRef.current ? "<+=40" : 0);
     }
 
-    // 3. Connector draws downward (starts 280 ms after card)
+    // 3. Connector draws downward (starts 180 ms after card)
     if (connRef.current) {
       tl.add(connRef.current, {
         scaleY: { from: 0, to: 1 },
         ease: "outQuad",
-        duration: 380,
-      }, "<+=280");
+        duration: 260,
+      }, "<+=180");
     }
   }, [inView]);
 
@@ -186,7 +186,7 @@ const ExperienceEntry = ({ exp, index, total }: EntryProps) => {
 
 // ── Section header — animates when it scrolls in ──────────────────────────────
 const SectionHeader = () => {
-  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
+  const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
   const elRef = useRef<HTMLDivElement>(null);
   const animated = useRef(false);
 

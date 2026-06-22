@@ -289,8 +289,7 @@ const LoadingScreen = () => {
                           : { scale: 0.6, opacity: 0.12 }
                       }
                       transition={{ duration: 0.3, ease: "backOut" }}
-                      transformOrigin={`${node.x}px ${node.y}px`}
-                      style={{ filter: isLit ? `drop-shadow(0 0 7px ${color})` : "none" }}
+                      style={{ filter: isLit ? `drop-shadow(0 0 7px ${color})` : "none", transformOrigin: `${node.x}px ${node.y}px` }}
                     />
 
                     {/* Inner dot */}

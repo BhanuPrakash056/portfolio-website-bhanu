@@ -368,7 +368,7 @@ const ModernHero = () => {
         <div className="flex justify-center gap-2 mb-16">
           {[
             { icon: Github, href: "https://github.com/BhanuPrakash056", label: "GitHub" },
-            { icon: Linkedin, href: "https://linkedin.com/in/bhanu-prakash-r", label: "LinkedIn" },
+            { icon: Linkedin, href: "https://linkedin.com/in/bhanuprakash-r", label: "LinkedIn" },
             { icon: Mail, href: "mailto:bp71712@gmail.com", label: "Email" },
           ].map((s, i) => (
             <a

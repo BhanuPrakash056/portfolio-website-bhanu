@@ -83,7 +83,7 @@ const Contact = () => {
 
   const socialLinks = [
     { icon: Github,   href: "https://github.com/BhanuPrakash056",         label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/bhanu-prakash-r",    label: "LinkedIn" },
+    { icon: Linkedin, href: "https://linkedin.com/in/bhanuprakash-r",    label: "LinkedIn" },
   ];
 
   return (

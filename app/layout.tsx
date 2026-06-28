@@ -6,21 +6,33 @@ import ErrorBoundary from "@/components/error-boundary";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
-const _geist = Geist({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const geist = Geist({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-geist",
+});
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-geist-mono",
+});
 
 export const metadata: Metadata = {
-  title: "Bhanu Prakash R | Full Stack Software Engineer",
+  title: "Bhanu Prakash R | Full Stack Software Engineer & React Developer",
   description:
-    "Professional portfolio of Bhanu Prakash R, a Full Stack Software Engineer with DevOps expertise working at Elanco.",
-  generator: "v0.app",
+    "Bhanu Prakash R is a Full Stack Software Engineer at Elanco specializing in React, Next.js, TypeScript, Node.js, AWS, and DevOps. Explore projects, experience, and skills.",
   keywords: [
+    "Bhanu Prakash R",
+    "Full Stack Software Engineer",
     "Full Stack Developer",
-    "React",
-    "Next.js",
-    "DevOps",
+    "React Developer",
+    "Next.js Developer",
     "TypeScript",
+    "Node.js",
+    "DevOps Engineer",
     "AWS",
+    "Cloud Engineer",
+    "Software Engineer Elanco",
     "Portfolio",
   ],
   authors: [{ name: "Bhanu Prakash R" }],
@@ -102,11 +114,13 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="BP Portfolio" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
       </head>
       <body
-        className={`font-sans antialiased bg-background text-foreground`}
+        className={`${geist.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
         suppressHydrationWarning
       >
         <ThemeProvider

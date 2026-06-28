@@ -329,16 +329,16 @@ const ModernHero = () => {
         </h1>
 
         {/* Role */}
-        <div
-          className="hero-subtitle flex items-center gap-4 mb-6"
+        <h2
+          className="hero-subtitle flex items-center gap-4 mb-6 text-base sm:text-lg font-medium"
           style={{ opacity: 0 }}
         >
           <span className="h-px w-8 bg-border" />
-          <span ref={subtitleSpanRef} className="text-base sm:text-lg font-medium text-primary tracking-wide">
+          <span ref={subtitleSpanRef} className="text-primary tracking-wide">
             Full Stack Software Engineer
           </span>
           <span className="h-px w-8 bg-border" />
-        </div>
+        </h2>
 
         {/* Description */}
         <p

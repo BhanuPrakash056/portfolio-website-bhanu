@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   title: "Bhanu Prakash R | Full Stack Software Engineer & React Developer",
   description:
     "Bhanu Prakash R is a Full Stack Software Engineer at Elanco specializing in React, Next.js, TypeScript, Node.js, AWS, and DevOps. Explore projects, experience, and skills.",
+  applicationName: "Bhanu Prakash R Portfolio",
+  category: "technology",
+  referrer: "origin-when-cross-origin",
   keywords: [
     "Bhanu Prakash R",
     "Full Stack Software Engineer",
@@ -34,8 +37,10 @@ export const metadata: Metadata = {
     "Cloud Engineer",
     "Software Engineer Elanco",
     "Portfolio",
+    "Bangalore Software Engineer",
+    "India Developer",
   ],
-  authors: [{ name: "Bhanu Prakash R" }],
+  authors: [{ name: "Bhanu Prakash R", url: "https://github.com/BhanuPrakash056" }],
   creator: "Bhanu Prakash R",
   publisher: "Bhanu Prakash R",
   formatDetection: {
@@ -118,6 +123,59 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+        {/* JSON-LD: Person schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Bhanu Prakash R",
+              url: "https://bhanuprakash-r.dev",
+              image: "https://bhanuprakash-r.dev/og-image.png",
+              jobTitle: "Software Engineer I",
+              worksFor: {
+                "@type": "Organization",
+                name: "Elanco",
+                url: "https://www.elanco.com",
+              },
+              sameAs: [
+                "https://github.com/BhanuPrakash056",
+                "https://linkedin.com/in/bhanuprakash-r",
+              ],
+              email: "bp71712@gmail.com",
+              knowsAbout: [
+                "React",
+                "Next.js",
+                "TypeScript",
+                "Node.js",
+                "AWS",
+                "DevOps",
+                "Kubernetes",
+                "Docker",
+                "PostgreSQL",
+              ],
+            }),
+          }}
+        />
+        {/* JSON-LD: WebSite schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Bhanu Prakash R Portfolio",
+              url: "https://bhanuprakash-r.dev",
+              description:
+                "Portfolio of Bhanu Prakash R — Full Stack Software Engineer specializing in React, Next.js, and cloud technologies.",
+              author: {
+                "@type": "Person",
+                name: "Bhanu Prakash R",
+              },
+            }),
+          }}
+        />
       </head>
       <body
         className={`${geist.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
